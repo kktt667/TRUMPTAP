@@ -46,3 +46,4 @@ async function sendMessage(chatId: number, text: string) {
     console.error('Error sending message:', error); // Log fetch errors
   }
 }
+
