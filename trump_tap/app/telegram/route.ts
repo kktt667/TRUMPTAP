@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 
-export async function POST(req) {
+export async function POST(req: Request) { // Specify the type for req
   try {
     const update = await req.json();
     console.log('Received update:', update); // Log incoming update
 
     if (update.message) {
-      const chatId = update.message.chat.id;
-      const text = update.message.text;
+      const chatId: number = update.message.chat.id; // Specify chatId type
+      const text: string = update.message.text; // Specify text type
       console.log('Chat ID:', chatId, 'Text:', text); // Log chat ID and message text
 
       if (text === '/start') {
@@ -22,7 +22,7 @@ export async function POST(req) {
   }
 }
 
-async function sendMessage(chatId, text) {
+async function sendMessage(chatId: number, text: string) { // Specify parameter types
   const url = `https://api.telegram.org/bot7547947333:AAGBDT9f39o9xRtIVFyWPe9mJbo2nlHcKak/sendMessage`;
   await fetch(url, {
     method: 'POST',
