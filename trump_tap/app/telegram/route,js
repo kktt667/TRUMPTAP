@@ -1,0 +1,32 @@
+import { NextResponse } from 'next/server';
+
+export async function POST(req) {
+  const update = await req.json();
+
+  // Handle incoming messages
+  if (update.message) {
+    const chatId = update.message.chat.id;
+    const text = update.message.text;
+
+    // Respond to the /start command
+    if (text === '/start') {
+      await sendMessage(chatId, 'Welcome to the Trump Mini App! Click the avatar to react!');
+    }
+  }
+
+  return NextResponse.json({ status: 'ok' });
+}
+
+async function sendMessage(chatId, text) {
+  const url = `https://api.telegram.org/bot<7547947333:AAGBDT9f39o9xRtIVFyWPe9mJbo2nlHcKak>/sendMessage`; // Replace with your actual bot token
+  await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: text,
+    }),
+  });
+}
