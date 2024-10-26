@@ -2,11 +2,14 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req) {
   const update = await req.json();
+  console.log('Received update:', update); // Log incoming update
 
   // Handle incoming messages
   if (update.message) {
     const chatId = update.message.chat.id;
     const text = update.message.text;
+
+    console.log('Chat ID:', chatId, 'Text:', text); // Log chat ID and message text
 
     // Respond to the /start command
     if (text === '/start') {
@@ -18,7 +21,7 @@ export async function POST(req) {
 }
 
 async function sendMessage(chatId, text) {
-  const url = `https://api.telegram.org/bot<7547947333:AAGBDT9f39o9xRtIVFyWPe9mJbo2nlHcKak>/sendMessage`; // Replace with your actual bot token
+  const url = `https://api.telegram.org/bot7547947333:AAGBDT9f39o9xRtIVFyWPe9mJbo2nlHcKak/sendMessage`; // Replace with your actual bot token
   await fetch(url, {
     method: 'POST',
     headers: {
